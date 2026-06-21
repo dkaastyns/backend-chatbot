@@ -30,7 +30,7 @@ async function runMigrations(): Promise<void> {
     console.log('✅ Terhubung ke database.\n');
 
     // Baca file migrasi
-    const migrationPath = resolve(import.meta.dirname ?? '.', 'migrations', '001_initial_schema.sql');
+    const migrationPath = resolve(__dirname, 'migrations', '001_initial_schema.sql');
     const sql = readFileSync(migrationPath, 'utf-8');
 
     console.log('📄 Menjalankan migrasi: 001_initial_schema.sql');

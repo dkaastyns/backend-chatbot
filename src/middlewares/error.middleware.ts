@@ -34,9 +34,8 @@ export function errorHandler(
   // Kirim respons
   res.status(statusCode).json({
     success: false,
-    error: isOperational || statusCode < 500
-      ? err.message
-      : 'Terjadi kesalahan internal pada server. Silakan coba lagi nanti.',
+    error: err.message,
+    stack: err.stack,
     timestamp: new Date().toISOString(),
   });
 }
