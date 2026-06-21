@@ -8,8 +8,15 @@ import * as chatController from '../controllers/chat.controller';
 const router = Router();
 
 // ---------------------------------------------------------------------------
-// Health Check
+// Health Check & Root
 // ---------------------------------------------------------------------------
+router.get('/', (_req, res) => {
+  res.json({
+    success: true,
+    message: 'DPRD Chatbot API v1 is Running...',
+    timestamp: new Date().toISOString()
+  });
+});
 router.get('/health', chatController.healthCheck);
 
 // ---------------------------------------------------------------------------
