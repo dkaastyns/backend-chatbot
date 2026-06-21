@@ -1,16 +1,12 @@
 {
   "version": 2,
-  "functions": {
-    "api/index.ts": {
-      "maxDuration": 60
-    }
-  },
   "builds": [
     {
       "src": "api/index.ts",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": ["src/**"]
+        "includeFiles": ["src/**"],
+        "maxDuration": 60
       }
     }
   ],
