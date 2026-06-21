@@ -26,8 +26,8 @@ import type {
 /**
  * Membuat sesi percakapan baru.
  */
-export async function createSession(body: CreateSessionBody): Promise<Session> {
-  const { title, client_id, topic_id } = body;
+export async function createSession(body: CreateSessionBody = {} as CreateSessionBody): Promise<Session> {
+  const { title, client_id, topic_id } = body || {};
 
   const result = await query<Session>(
     `INSERT INTO sessions (title, client_id, topic_id)
