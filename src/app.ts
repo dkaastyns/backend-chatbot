@@ -22,10 +22,9 @@ const app = express();
 
 // CORS
 app.use(cors({
-  origin: env.CORS_ORIGIN === '*' ? true : env.CORS_ORIGIN.split(','),
+  origin: env.CORS_ORIGIN === '*' ? '*' : env.CORS_ORIGIN.split(','),
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Client-ID'],
-  credentials: true,
 }));
 
 // Body Parsing
