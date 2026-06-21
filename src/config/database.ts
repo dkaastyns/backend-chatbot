@@ -15,9 +15,11 @@ const { Pool } = pg;
 const pool = new Pool({
   connectionString: env.DATABASE_URL,
   ssl: env.DATABASE_URL.includes('sslmode=require') ? { rejectUnauthorized: false } : undefined,
-  max: 20,
-  idleTimeoutMillis: 30_000,
+  // Serverless-friendly: pool kecil agar tidak melebihi batas koneksi Neon DB
+  max: 3,
+  idleTimeoutMillis: 10_000,
   connectionTimeoutMillis: 10_000,
+  allowExitOnIdle: true,
 });
 
 pool.on('connect', () => {

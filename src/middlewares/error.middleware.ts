@@ -35,7 +35,8 @@ export function errorHandler(
   res.status(statusCode).json({
     success: false,
     error: err.message,
-    stack: err.stack,
+    // Hanya tampilkan stack di development, sembunyikan di production (security)
+    ...(process.env.NODE_ENV !== 'production' && { stack: err.stack }),
     timestamp: new Date().toISOString(),
   });
 }

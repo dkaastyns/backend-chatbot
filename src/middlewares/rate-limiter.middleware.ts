@@ -1,6 +1,9 @@
 // ============================================================================
 // DPRD Chatbot — In-Memory Rate Limiter Middleware
 // ============================================================================
+// Vercel Serverless kompatibel: tidak pakai setInterval (tidak ada persistent
+// memory antar invocation). Cleanup dilakukan secara lazy saat request masuk.
+// ============================================================================
 
 import type { Request, Response, NextFunction } from 'express';
 import { env } from '../config/environment';
@@ -13,15 +16,18 @@ interface RateLimitEntry {
 
 const store = new Map<string, RateLimitEntry>();
 
-// Bersihkan entri kadaluarsa setiap 5 menit
-setInterval(() => {
+/**
+ * Hapus entri kadaluarsa secara lazy (dipanggil setiap request masuk).
+ * Kompatibel dengan Vercel Serverless — tidak perlu setInterval.
+ */
+function cleanupExpired(): void {
   const now = Date.now();
   for (const [key, entry] of store) {
     if (now > entry.reset_at) {
       store.delete(key);
     }
   }
-}, 5 * 60 * 1000);
+}
 
 /**
  * Mendapatkan identifier unik dari request (IP address).
@@ -40,6 +46,9 @@ export function rateLimiter(
   res: Response,
   next: NextFunction,
 ): void {
+  // Lazy cleanup agar store tidak membengkak (tanpa setInterval)
+  cleanupExpired();
+
   const clientId = getClientId(req);
   const now = Date.now();
   const windowMs = env.RATE_LIMIT_WINDOW_MS;

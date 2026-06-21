@@ -20,12 +20,15 @@ const app = express();
 // Global Middleware
 // ---------------------------------------------------------------------------
 
-// CORS
+// CORS — izinkan semua origin untuk deployment Vercel
 app.use(cors({
-  origin: env.CORS_ORIGIN === '*' ? '*' : env.CORS_ORIGIN.split(','),
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Client-ID'],
 }));
+
+// Handle preflight OPTIONS requests
+app.options('*', cors());
 
 // Body Parsing
 app.use(express.json({ limit: '1mb' }));
