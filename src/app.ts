@@ -27,8 +27,8 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Client-ID'],
 }));
 
-// Handle preflight OPTIONS requests
-app.options('*', cors());
+// Handle preflight OPTIONS requests (Express v5 syntax)
+app.options('/{*path}', cors());
 
 // Body Parsing
 app.use(express.json({ limit: '1mb' }));
