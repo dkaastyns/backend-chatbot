@@ -75,7 +75,7 @@ export const env: EnvironmentVariables = {
   LOG_LEVEL:                getOptionalEnv('LOG_LEVEL', 'debug'),
   RATE_LIMIT_WINDOW_MS:     parseIntEnv('RATE_LIMIT_WINDOW_MS', 60_000),
   RATE_LIMIT_MAX_REQUESTS:  parseIntEnv('RATE_LIMIT_MAX_REQUESTS', 30),
-  AI_MODEL:                 getOptionalEnv('AI_MODEL', 'gemini-2.5-flash'),
+  AI_MODEL:                 getOptionalEnv('AI_MODEL', 'gemini-2.0-flash'),
   AI_TEMPERATURE:           parseFloatEnv('AI_TEMPERATURE', 0.2),
   CORS_ORIGIN:              getOptionalEnv('CORS_ORIGIN', '*'),
 };
