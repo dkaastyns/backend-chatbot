@@ -1,0 +1,30 @@
+{
+  "name": "ri-dprd-chatbot-backend",
+  "version": "1.0.0",
+  "description": "Backend API untuk Chatbot DPRD Kota Semarang & Pemerintahan Indonesia",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "bun run --watch index.ts",
+    "start": "bun run index.ts",
+    "db:migrate": "bun run migrate.ts"
+  },
+  "dependencies": {
+    "@google/genai": "^2.9.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "pg": "^8.22.0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.2",
+    "@types/pg": "^8.11.6",
+    "nodemon": "^3.1.14"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
